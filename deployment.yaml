@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql_django
+  name: mysql-django
 spec:
   selector:
     matchLabels:
-      app: mysql_django
+      app: mysql-django
   replicas: 1
   template:
     metadata:
       labels:
-        app: mysql_django
+        app: mysql-django
     spec:
       imagePullSecrets:
       - name: pipeline-docker-registry
@@ -26,14 +26,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql_django
+  name: mysql-django
   #namespace: coba-namespace
   labels:
-    app: mysql_django
+    app: mysql-django
 spec:
   type: NodePort
   ports:
   - port: 3306
     nodePort: 30309
   selector:
-    app: mysql_django
+    app: mysql-django
