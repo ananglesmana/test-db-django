@@ -15,7 +15,7 @@ spec:
       imagePullSecrets:
       - name: pipeline-docker-registry
       containers:
-      - name: mysql_django
+      - name: mysql-django
         #namespace: coba-namespace
         image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
         ports:
