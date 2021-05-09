@@ -19,7 +19,7 @@ spec:
         #namespace: coba-namespace
         image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
         ports:
-        - containerPort: 80
+        - containerPort: 3306
       restartPolicy: Always
      
 ---
