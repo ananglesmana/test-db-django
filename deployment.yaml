@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db_django
+spec:
+  selector:
+    matchLabels:
+      app: db_django
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: db_django
+    spec:
+      imagePullSecrets:
+      - name: pipeline-docker-registry
+      containers:
+      - name: app-coba
+        namespace: coba-namespace
+        image: ${CICD_IMAGE}:${CICD_EXECUTION_SEQUENCE}
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
+     
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db_django
+  namespace: coba-namespace
+  labels:
+    app: db_django
+spec:
+  type: NodePort
+  ports:
+  - port: 3306
+    nodePort: 30309
+  selector:
+    app: db_django
